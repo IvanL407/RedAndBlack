@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+<style>
+    table, th, td {
+        border:1px solid black;
+    }
+</style>
+<script>
+    function initialize()
+    {
+        blacktokens = document.getElementById("blacktokens");
+        redtokens = document.getElementById("redtokens");
+        computerredtokens = document.getElementById("computerred");
+        computerblacktokens = document.getElementById("computerblack");
+        previousRoll = document.getElementById("roll");
+        playerred = 12;
+        playerblack = 12;
+        computerred = 12;
+        computerblack = 12;     
+    }
+
+    function reset()
+    {
+        initialize();
+        myTable.innerHTML = "Log";
+        myTable.style.border = "1px solid black";
+        display();
+    }
+
+    function roll()
+    {
+        num = parseInt(Math.random()*6 + 1);
+        display();
+    }
+
+    function addRed()
+    {
+        playerred += num;
+        if (playerred < 0)
+        {
+            playerred = 0;
+        }
+        display();
+        let table = document.getElementById("myTable");
+        let row = table.insertRow(-1);
+        let c1 = row.insertCell(0);
+        c1.innerText = "Player added " + num + " tokens to their red.";
+        computerRoll();
+    }
+    function addBlack()
+    {
+        playerblack += num;
+        if (playerblack < 0)
+        {
+            playerblack = 0;
+        }
+        display();
+        let table = document.getElementById("myTable");
+        let row = table.insertRow(-1);
+        let c1 = row.insertCell(0);
+        c1.innerText = "Player added " + num + " tokens to their black.";
+        computerRoll();
+    }
+
+    // function addBlackFromComputer(rollFromComputer)
+    // {
+    //     playerblack += rollFromComputer;
+    //     if (playerblack < 0)
+    //     {
+    //         playerblack = 0;
+    //     }
+    //     display();
+    //     let table = document.getElementById("myTable");
+    //     let row = table.insertRow(-1);
+    //     let c1 = row.insertCell(0);
+    //     c1.innerText = "Computer added " + rollFromComputer + " tokens to player's black.";
+    //     //computerRoll();
+    // }
+
+    function removeRed()
+    {
+        computerred -= num;
+        if (computerred < 0)
+        {
+            computerred = 0;
+        }
+        display();
+        let table = document.getElementById("myTable");
+        let row = table.insertRow(-1);
+        let c1 = row.insertCell(0);
+        c1.innerText = "Player removed " + num + " tokens from computer's red.";
+        computerRoll();
+    }
+    function removeBlack()
+    {
+        computerblack -= num;
+        if (computerblack < 0)
+        {
+            computerblack = 0;
+        }
+        display();
+        let table = document.getElementById("myTable");
+        let row = table.insertRow(-1);
+        let c1 = row.insertCell(0);
+        c1.innerText = "Player removed " + num + " tokens from computer's black.";
+        computerRoll();
+    }
+
+    function computerRoll()
+    {
+        compRoll = parseInt(Math.random()*6 + 1);
+        compChoice = parseInt(Math.random()*4 + 1);
+        // enhancement = parseInt(Math.random()*4 + 1);
+
+        // if (enhancement < 4)
+        // {
+        //     if (computerred < playerred)
+        //     {
+        //         if (computerblack < playerblack)
+        //         {
+        //             computerAddBlack();
+        //             checkWin();
+        //         }
+        //         else
+        //         {
+        //             addBlackFromComputer(compRoll);
+        //             checkWin();
+        //         }
+        //     }
+        // }
+        // else if (enhancement == 4)
+        // {
+        //     secondenhancement = parseInt(Math.random()*4 + 1);
+        //     if (secondenhancement == 1)
+        //     {
+        //         computerAddRed();
+        //         checkWin();
+        //     } 
+        //     else if (secondenhancement == 2)
+        //     {
+        //         computerAddBlack();
+        //         checkWin();
+        //     }
+        //     else if (secondenhancement == 3)
+        //     {
+        //         computerRemoveRed();
+        //         checkWin();
+        //     }
+        //     else
+        //     {
+        //         computerRemoveBlack();
+        //         checkWin();
+        //     }
+        // }
+        
+
+
+
+
+        if (compChoice == 1)
+        {
+            computerAddRed();
+            checkWin();
+        }
+        else if (compChoice == 2)
+        {
+            computerAddBlack();
+            checkWin();
+        }
+        else if (compChoice == 3)
+        {
+            computerRemoveRed();
+            checkWin();
+        }
+        else
+        {
+            computerRemoveBlack();
+            checkWin();
+        }
+    }
+
+    function computerAddRed()
+    {
+        computerred += compRoll;
+        if (computerred < 0)
+        {
+            computerred = 0;
+        }
+        display();
+        let table = document.getElementById("myTable");
+        let row = table.insertRow(-1);
+        let c1 = row.insertCell(0);
+        c1.innerText = "Computer added " + compRoll + " tokens to their red.";
+    }
+
+    function computerAddBlack()
+    {
+        computerblack += compRoll;
+        if (computerblack < 0)
+        {
+            computerblack = 0;
+        }
+        display();
+        let table = document.getElementById("myTable");
+        let row = table.insertRow(-1);
+        let c1 = row.insertCell(0);
+        c1.innerText = "Computer added " + compRoll + " tokens to their black.";
+    }
+
+    function computerRemoveRed()
+    {
+        playerred -= compRoll;
+        if (playerred < 0)
+        {
+            playerred = 0;
+        }
+        display();
+        let table = document.getElementById("myTable");
+        let row = table.insertRow(-1);
+        let c1 = row.insertCell(0);
+        c1.innerText = "Computer removed " + compRoll + " tokens from player's red.";
+    }
+
+    function computerRemoveBlack()
+    {
+        playerblack -= compRoll;
+        if (playerblack < 0)
+        {
+            playerblack = 0;
+        }
+        display();
+        let table = document.getElementById("myTable");
+        let row = table.insertRow(-1);
+        let c1 = row.insertCell(0);
+        c1.innerText = "Computer removed " + compRoll + " tokens from player's black.";
+    }
+
+    function checkWin()
+    {
+        if (playerblack == 0 || computerblack == 0)
+        {
+            if (playerred > computerred)
+            {
+                let table = document.getElementById("myTable");
+                let row = table.insertRow(-1);
+                let c1 = row.insertCell(0);
+                c1.innerText = "You win! Click reset to play again!";
+                return true;
+            }
+            else
+            {
+                let table = document.getElementById("myTable");
+                let row = table.insertRow(-1);
+                let c1 = row.insertCell(0);
+                c1.innerText = "Computer wins! Click reset to play again!";
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function display()
+    {
+        previousRoll.innerHTML = num;
+        redtokens.innerHTML = playerred;
+        blacktokens.innerHTML = playerblack;
+        computerredtokens.innerHTML = computerred;
+        computerblacktokens.innerHTML = computerblack;
+    }
+</script>
+
+</head>
+<body onload = "initialize();">
+    <h1>Black and Red</h1>
+    <p>Whoever has the most red tokens when a player has zero black tokens wins!</p>
+
+    <br>Player Black Tokens: <span id = "blacktokens">12</span></br>
+    <br>Player Red Tokens: <span id = "redtokens">12</span></br>
+
+    <br>Previous Roll: <span id = "roll">0</span></br>
+    <br><br>
+
+    <button onclick = "roll();">
+        Roll
+    </button>
+
+    <br><br>
+    <button onclick = "addRed();">
+        Add to Your Red
+    </button>
+    <br><br>
+    <button onclick = "addBlack();">
+        Add to Your Black
+    </button>
+    <br><br>
+    <button onclick = "removeRed();">
+        Remove Computer's Red
+    </button>
+    <br><br>
+    <button onclick = "removeBlack();">
+        Remove Computer's Black
+    </button>
+
+    <br><br>
+    <button onclick = "reset();">
+        Reset
+    </button>
+
+    <br><br>
+
+    <br>Computer Black Tokens: <span id = "computerblack">12</span></br>
+    <br>Computer Red Tokens: <span id = "computerred">12</span></br>
+
+    <br><br>
+    <table id="myTable">
+        <tr>
+            <th>Log</th>
+        </tr>
+        
+    </table>
+</body>
+</html>
